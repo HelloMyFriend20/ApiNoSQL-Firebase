@@ -1,26 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/style.css">
-    <title>Lorem Picsum</title>
+  <meta charset="UTF-8" />
+  <title>Lorem Picsum</title>
+  <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-    <button id="btn-instalar" style="display:none;">Instalar App</button>
-    <main id="app">
-        <!-- Contenido dinámico -->
-    </main>
+  <div id="menu"></div>
+  <div id="app">Cargando...</div>
 
-    <aside class="c-nav">
-        <button class="c-nav-item" onclick="mostrarAleatorio()">Aleatorio</button>
-        <button class="c-nav-item" onclick="mostrarLista()">Lista</button>
-        <button class="c-nav-item" onclick="mostrarBatalla()">Batalla</button>
-        <button class="c-nav-item" onclick="mostrarBusqueda()">Busqueda</button>
-    </aside>  
-    <script src="JavaScript/aleatorio.js"></script>
-    <script src="src/componentes/batalla.js"></script>
-    <script src="JavaScript/lista.js"></script>
-    <script src="JavaScript/busqueda.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>

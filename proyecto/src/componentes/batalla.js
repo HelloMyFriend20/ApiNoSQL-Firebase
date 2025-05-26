@@ -1,4 +1,4 @@
-function mostrarBatalla() {
+export default async function mostrarBatalla() {
     const app = document.getElementById("app");
     app.innerHTML = ''; // Limpiar el contenido anterior
 

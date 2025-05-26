@@ -1,26 +1,45 @@
+let imagenesData = []; // Guardamos los datos para el buscador
+
 export default async function mostrarHome() {
-  const app = document.getElementById("app");
-  app.innerHTML = `<h2>Pokémon</h2><div id="lista" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 10px;"></div>`;
+    const app = document.getElementById("app");
+    app.innerHTML = '<h2>Pokémon</h2><div id="lista" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; padding: 10px;"></div>'; // Limpiar contenido anterior
+    imagenesData = [];  // Reiniciar lista
 
-  const lista = document.getElementById("lista");
+    for (let i = 0; i < 21; i++) {
+        const id = Math.floor(Math.random() * 1000); // ID aleatorio
+        const nombre = `Imagen ${id}`;
+        const url = `https://picsum.photos/id/${id}/300/200`;
 
-  try {
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1025");
-    const json = await res.json();
-    const data = json.results;
+        // Guardar info para buscador
+        imagenesData.push({ id, nombre, url });
+    }
 
-    data.forEach((pokemon) => {
-      const id = pokemon.url.split("/")[6];
-      const item = document.createElement("div");
+    renderizarImagenes(imagenesData);
+}
 
-      item.innerHTML = `
-        <p>${id} - ${pokemon.name}</p>
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" style="width: 100px; height: 100px;" />
-      `;
+function renderizarImagenes(lista) {
+    const app = document.getElementById("app");
+    app.innerHTML = '';
 
-      lista.appendChild(item);
+    lista.forEach((imgData) => {
+        const contenedor = document.createElement('div');
+        contenedor.className = 'imagen-card';
+
+        const img = document.createElement('img');
+        img.src = imgData.url;
+        img.alt = imgData.nombre;
+
+        const nombre = document.createElement('p');
+        nombre.textContent = imgData.nombre;
+
+        contenedor.appendChild(img);
+        contenedor.appendChild(nombre);
+        app.appendChild(contenedor);
     });
-  } catch (error) {
-    app.innerHTML = `<p>Error al cargar los Pokémon: ${error.message}</p>`;
-  }
+}
+
+function filtrarImagenes() {
+    const texto = document.getElementById("buscador").value.toLowerCase();
+    const filtradas = imagenesData.filter(img => img.nombre.toLowerCase().includes(texto));
+    renderizarImagenes(filtradas);
 }
